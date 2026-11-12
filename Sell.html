@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sell Your Apple Device — WeBuyApple</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#FAFAFA;
+      --surface:#FFFFFF;
+      --muted:#64748B;
+      --accent:#3B82F6;
+      --accent-600:#1E66E6;
+      --success:#10B981;
+      --danger:#EF4444;
+      --text:#0F1724;
+      --card-w:320px;
+      --card-img-h:180px;
+      --transition:0.28s cubic-bezier(.2,.9,.2,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+    a{color:inherit}
+    img{max-width:100%;display:block}
+
+    /* NAVBAR */
+    .navbar{
+      width:100%;
+      position:fixed;
+      top:0;left:0;
+      z-index:1000;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:12px 22px;
+      background:var(--surface);
+      border-bottom:1px solid #F4F6F8;
+      box-shadow:0 6px 18px rgba(12,12,12,0.03);
+    }
+    .logo img{height:38px}
+    .nav-links{display:flex;gap:18px;align-items:center}
+    .nav-links a{font-size:14px;text-decoration:none;color:var(--text)}
+    .cta-btn{background:var(--accent);color:#fff;padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+
+    /* HERO */
+    .hero{margin-top:72px;padding:36px 22px;border-bottom:1px solid #F4F4F5;background:linear-gradient(90deg, rgba(59,130,246,0.06), rgba(16,185,129,0.02));display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .hero-left h1{font-size:26px;margin:0 0 6px 0;font-weight:800}
+    .hero-left p{margin:0;color:var(--muted)}
+
+    .container{max-width:980px;margin:30px auto;padding:20px}
+
+    /* FORM CARD */
+    .form-grid{display:grid;grid-template-columns:1fr 360px;gap:22px}
+    .form-card{background:var(--surface);padding:20px;border-radius:14px;box-shadow:0 10px 30px rgba(12,12,12,0.04);overflow:hidden}
+    .side-card{background:linear-gradient(180deg,#FFFFFF, #FAFBFF);padding:18px;border-radius:12px;border:1px solid #EEF2FF}
+
+    h2{margin:0 0 12px 0}
+    .form-group{margin-bottom:14px;display:flex;flex-direction:column;gap:8px}
+    label{font-weight:700;font-size:13px;color:#0F1724}
+    select,input,textarea{padding:12px;border-radius:10px;border:1px solid #E6EEF9;font-size:14px;background:#fff}
+    textarea{min-height:100px}
+
+    .inline{display:flex;gap:10px}
+    .inline .half{flex:1}
+
+    .muted{color:var(--muted);font-size:13px}
+
+    .quote-box{padding:14px;border-radius:10px;background:#F8FAFC;border:1px solid #E6F0FF;font-weight:700}
+
+    .images-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .img-thumb{width:80px;height:80px;border-radius:8px;overflow:hidden;border:1px solid #E6EEF9;position:relative;display:flex;align-items:center;justify-content:center;background:#fff}
+    .img-thumb img{width:100%;height:100%;object-fit:cover}
+    .img-remove{position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.6);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer}
+
+    .actions{display:flex;gap:10px;margin-top:12px}
+    .btn{padding:12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .btn-primary{background:var(--accent);color:#fff}
+    .btn-ghost{background:transparent;border:1px solid #E6EEF9}
+
+    .small{font-size:13px}
+
+    /* animations */
+    .fade-in{animation:fadeIn .45s var(--transition) both}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+    /* FOOTER */
+    .footer{padding:28px;text-align:center;color:var(--muted);font-size:14px;margin-top:20px;border-top:1px solid #F4F4F5}
+
+    /* responsive */
+    @media(max-width:920px){.form-grid{grid-template-columns:1fr}.hero-left h1{font-size:22px}}
+    @media(max-width:420px){.navbar{padding:10px}.hero{padding:18px}.container{padding:12px}}
+
+    /* validation */
+    .error{border-color:var(--danger)!important;box-shadow:0 6px 18px rgba(239,68,68,0.06)}
+    .error-text{color:var(--danger);font-size:13px;margin-top:6px}
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="navbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="logo"><img src="https://webuyapple.co.za/wp-content/uploads/2022/07/WBA-Logo-2.png" alt="WeBuyApple"></div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="Iphones.html">iPhones</a>
+        <a href="Macbook.html">MacBooks</a>
+        <a href="sell.html" aria-current="page">Sell Device</a>
+      </nav>
+    </div>
+    <a class="cta-btn" href="sell.html">Sell Device</a>
+  </header>
+
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Sell Your Apple Device</h1>
+      <p class="muted">Fast quotes • Secure process • Pay on collection or bank transfer</p>
+    </div>
+    <div class="hero-actions">
+      <small class="muted">Need help? <a href="#contact" style="color:var(--accent);text-decoration:none">Contact us</a></small>
+    </div>
+  </section>
+
+  <main class="container fade-in">
+    <div class="form-grid">
+
+      <!-- MAIN FORM -->
+      <form id="sellForm" class="form-card" onsubmit="event.preventDefault(); handleSubmit()" novalidate>
+
+        <h2>Device Information</h2>
+
+        <div class="form-group">
+          <label for="category">Apple Category</label>
+          <select id="category" required>
+            <option value="">Select product</option>
+            <option value="iPhone">iPhone</option>
+            <option value="MacBook">MacBook</option>
+            <option value="iPad">iPad</option>
+            <option value="Apple Watch">Apple Watch</option>
+            <option value="AirPods">AirPods</option>
+          </select>
+          <div id="categoryError" class="error-text" style="display:none">Please select a category.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="model">Model (select or type)</label>
+          <input id="model" list="models" placeholder="e.g. iPhone 13 Pro Max" autocomplete="off" required>
+          <datalist id="models">
+            <!-- common iPhone models included for model-specific pricing -->
+            <option>iPhone 15 Pro Max</option>
+            <option>iPhone 15 Pro</option>
+            <option>iPhone 15 Plus</option>
+            <option>iPhone 15</option>
+            <option>iPhone 14 Pro Max</option>
+            <option>iPhone 14 Pro</option>
+            <option>iPhone 14</option>
+            <option>iPhone 13 Pro Max</option>
+            <option>iPhone 13</option>
+            <option>MacBook Air M3</option>
+            <option>MacBook Pro 14" M3</option>
+            <option>iPad Pro 12.9"</option>
+            <option>Apple Watch Series 9</option>
+          </datalist>
+          <div id="modelError" class="error-text" style="display:none">Please enter the model.</div>
+        </div>
+
+        <div class="form-group inline">
+          <div class="half">
+            <label for="storage">Storage</label>
+            <select id="storage">
+              <option value="">Select storage</option>
+              <option value="64">64GB</option>
+              <option value="128">128GB</option>
+              <option value="256">256GB</option>
+              <option value="512">512GB</option>
+              <option value="1024">1TB</option>
+            </select>
+          </div>
+
+          <div class="half">
+            <label for="condition">Condition</label>
+            <select id="condition" required>
+              <option value="">Select condition</option>
+              <option value="Brand New">Brand New</option>
+              <option value="Like New">Like New</option>
+              <option value="Excellent">Excellent</option>
+              <option value="Good">Good</option>
+              <option value="Fair">Fair</option>
+              <option value="Faulty">Faulty</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Notes (battery health, scratches, box, charger)</label>
+          <textarea id="notes" placeholder="e.g. Battery 88%, small scratch on back"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="images">Upload images (max 5)</label>
+          <input id="images" type="file" accept="image/*" multiple>
+          <div id="imagesPreview" class="images-preview" aria-live="polite"></div>
+          <div id="imagesError" class="error-text" style="display:none">You can upload up to 5 images (jpg/png).</div>
+        </div>
+
+        <h2 style="margin-top:8px">Your Details</h2>
+
+        <div class="form-group inline">
+          <div class="half">
+            <label for="name">Full name</label>
+            <input id="name" type="text" placeholder="" required>
+            <div id="nameError" class="error-text" style="display:none">Please enter your name.</div>
+          </div>
+         <div class="half">
+  <label for="phone">Phone (WhatsApp)</label>
+<input
+  id="phone"
+  type="tel"
+  placeholder="+27 76 123 4567"
+  required
+  pattern="^\+?[0-9]{7,15}$"
+>
+
+
+>
+
+  <div id="phoneError" class="error-text" style="display:none">
+    Enter a valid phone number (include country code, e.g. +27).
+  </div>
+</div>
+
+
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" onclick="saveDraft()">Save Draft</button>
+          <button type="submit" class="btn btn-primary">Send via WhatsApp</button>
+        </div>
+
+      </form>
+
+      <!-- SIDE / QUOTE + HELP -->
+      <aside class="side-card fade-in">
+        <h3>Your Estimated Quote</h3>
+        <div id="quoteArea" class="quote-box">Select category and condition to see estimate.</div>
+
+        <div style="margin-top:14px">
+          <h4 style="margin:0 0 6px 0">How the estimate works</h4>
+          <p class="muted small">Model-specific base price (iPhone list included) + storage adjustment + condition multiplier. This is an instant estimate — final quote after inspection.</p>
+        </div>
+
+        <div style="margin-top:12px">
+          <h4 style="margin:0 0 6px 0">Tips to get more</h4>
+          <ul class="muted small" style="padding-left:18px;margin:6px 0">
+            <li>Include original charger & box</li>
+            <li>Clear photos of front, back, and ports</li>
+            <li>Note battery health for iPhones</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:14px;font-size:13px">
+          <strong>Support:</strong>
+          <div id="contact" class="muted small">WhatsApp or call: <a id="supportPhone" href="#" style="color:var(--accent)">+27 76 123 4567</a></div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer class="footer">© <span id="year"></span> WeBuyApple — Sell Your Apple Device</footer>
+
+  <script>
+    // ---------- CONFIG ----------
+    // Replace with your business WhatsApp phone number (international format). Keep the + sign.
+    const BUSINESS_WHATSAPP = "+27839520098"; // <- REPLACE THIS with your number, e.g. +27761234567
+
+    // Optional support phone shown in UI (replace as needed)
+    document.getElementById('supportPhone').textContent = '+27 76 123 4567';
+    document.getElementById('supportPhone').href = 'tel:+27761234567';
+
+    // ---------- MODEL-SPECIFIC PRICING (iPhone focused) ----------
+    const iphoneBasePrices = {
+      "iPhone 15 Pro Max": 42000,
+      "iPhone 15 Pro": 36000,
+      "iPhone 15 Plus": 31000,
+      "iPhone 15": 28000,
+      "iPhone 14 Pro Max": 26000,
+      "iPhone 14 Pro": 22000,
+      "iPhone 14": 18000,
+      "iPhone 13 Pro Max": 16000,
+      "iPhone 13": 12000,
+      "iPhone 12": 9000,
+      // fallback base for unknown models
+      "DEFAULT_IPHONE": 8000
+    };
+
+    const categoryBase = {
+      "MacBook": 15000,
+      "iPad": 6000,
+      "Apple Watch": 3000,
+      "AirPods": 1500
+    };
+
+    const conditionMultiplier = {
+      "Brand New": 1.0,
+      "Like New": 0.92,
+      "Excellent": 0.82,
+      "Good": 0.68,
+      "Fair": 0.46,
+      "Faulty": 0.20
+    };
+
+    const storageMultiplier = (gb) => {
+      if (!gb) return 1;
+      const size = parseInt(gb, 10);
+      if (size >= 1024) return 1.35;
+      if (size >= 512) return 1.2;
+      if (size >= 256) return 1.1;
+      if (size >= 128) return 1.03;
+      return 1.0;
+    };
+
+    // ---------- DOM ----------
+    const categoryEl = document.getElementById('category');
+    const modelEl = document.getElementById('model');
+    const storageEl = document.getElementById('storage');
+    const conditionEl = document.getElementById('condition');
+
+    const imagesEl = document.getElementById('images');
+    const imagesPreview = document.getElementById('imagesPreview');
+
+    const quoteArea = document.getElementById('quoteArea');
+
+    // restore draft if available
+    window.addEventListener('load', () => {
+      const draft = localStorage.getItem('sellDraft');
+      if (draft) {
+        try {
+          const data = JSON.parse(draft);
+          Object.keys(data).forEach(k => {
+            const el = document.getElementById(k);
+            if (el && k !== 'imagesData') el.value = data[k];
+          });
+          if (data.imagesData) restoreImagePreviews(data.imagesData);
+        } catch(e) { /* ignore */ }
+      }
+      updateQuote();
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+
+    // ---------- IMAGE PREVIEW HANDLING ----------
+    const MAX_IMAGES = 5;
+    let imagesData = []; // store base64 previews for draft
+
+    imagesEl.addEventListener('change', (e) => {
+      const files = Array.from(e.target.files).slice(0, MAX_IMAGES);
+      if (files.length > MAX_IMAGES) {
+        showError('imagesError', 'You can upload up to 5 images.');
+        return;
+      }
+      imagesData = [];
+      imagesPreview.innerHTML = '';
+
+      files.forEach((file, idx) => {
+        if (!file.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          const src = ev.target.result;
+          imagesData.push(src);
+          const thumb = document.createElement('div');
+          thumb.className = 'img-thumb';
+          thumb.innerHTML = `<img src="${src}" alt="image-${idx}" /><div class="img-remove" title="Remove">&times;</div>`;
+          imagesPreview.appendChild(thumb);
+
+          thumb.querySelector('.img-remove').addEventListener('click', () => {
+            imagesData = imagesData.filter(s => s !== src);
+            thumb.remove();
+          });
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    function restoreImagePreviews(list){
+      imagesPreview.innerHTML = '';
+      imagesData = list.slice(0, MAX_IMAGES);
+      imagesData.forEach((src, idx) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'img-thumb';
+        thumb.innerHTML = `<img src="${src}" alt="image-${idx}" /><div class="img-remove" title="Remove">&times;</div>`;
+        imagesPreview.appendChild(thumb);
+        thumb.querySelector('.img-remove').addEventListener('click', () => {
+          imagesData = imagesData.filter(s => s !== src);
+          thumb.remove();
+        });
+      });
+    }
+
+    // ---------- QUOTE ESTIMATOR ----------
+    function getEstimate(){
+      const category = categoryEl.value;
+      const model = modelEl.value.trim();
+      const storage = storageEl.value;
+      const condition = conditionEl.value;
+
+      if (!category || !condition) return null;
+
+      let base = 0;
+      if (category === 'iPhone'){
+        base = iphoneBasePrices[model] || iphoneBasePrices['DEFAULT_IPHONE'];
+      } else {
+        base = categoryBase[category] || 4000;
+      }
+
+      // model age depreciation heuristic: if model string contains year-like digits reduce slightly
+      const yearMatch = model.match(/(20\\d{2}|19\\d{2})/);
+      let ageFactor = 1;
+      if (yearMatch){
+        const year = parseInt(yearMatch[0],10);
+        const age = Math.max(0, new Date().getFullYear() - year);
+        ageFactor = Math.max(0.6, 1 - (age * 0.07));
+      }
+
+      const sMult = storageMultiplier(storage);
+      const cMult = conditionMultiplier[condition] || 0.6;
+
+      let estimate = Math.round(base * sMult * cMult * ageFactor);
+      // minimum floor for faulty small items
+      if (estimate < 150 && category === 'AirPods') estimate = 150;
+      return estimate;
+    }
+
+    function updateQuote(){
+      const est = getEstimate();
+      if (est === null){
+        quoteArea.textContent = 'Select category and condition to see estimate.';
+        return;
+      }
+      quoteArea.innerHTML = `Estimated Quote: <span style="font-size:18px">R ${est.toLocaleString()}</span>`;
+    }
+
+    [categoryEl, modelEl, storageEl, conditionEl].forEach(el => el.addEventListener('change', updateQuote));
+    modelEl.addEventListener('input', () => { /* live update when typing */ updateQuote(); });
+
+    // ---------- VALIDATION ----------
+    function showError(id, message){
+      const el = document.getElementById(id);
+      if (el){ el.textContent = message; el.style.display = 'block'; }
+    }
+    function hideError(id){
+      const el = document.getElementById(id);
+      if (el){ el.style.display = 'none'; }
+    }
+
+    function validate(){
+      let ok = true;
+      // category
+      if (!categoryEl.value){ document.getElementById('category').classList.add('error'); showError('categoryError','Please select a category.'); ok=false; }
+      else { document.getElementById('category').classList.remove('error'); hideError('categoryError'); }
+
+      if (!modelEl.value.trim()){ modelEl.classList.add('error'); showError('modelError','Please enter the model.'); ok=false; }
+      else { modelEl.classList.remove('error'); hideError('modelError'); }
+
+      if (!conditionEl.value){ conditionEl.classList.add('error'); ok=false; }
+      else { conditionEl.classList.remove('error'); }
+
+      const name = document.getElementById('name');
+      if (!name.value.trim()){ name.classList.add('error'); showError('nameError','Please enter your name.'); ok=false; }
+      else { name.classList.remove('error'); hideError('nameError'); }
+
+      const phone = document.getElementById('phone');
+      const phoneVal = phone.value.trim();
+      const phoneRegex = /^\+?[0-9]{7,15}$/; // simple check
+      if (!phoneVal || !phoneRegex.test(phoneVal)){ phone.classList.add('error'); showError('phoneError','Enter a valid phone number (include country code, e.g. +27).'); ok=false; }
+      else { phone.classList.remove('error'); hideError('phoneError'); }
+
+      if (imagesData.length > MAX_IMAGES){ showError('imagesError','You can upload up to 5 images.'); ok=false; }
+      else { hideError('imagesError'); }
+
+      return ok;
+    }
+
+    // ---------- SAVE DRAFT ----------
+    function saveDraft(){
+      const payload = {
+        category: categoryEl.value,
+        model: modelEl.value,
+        storage: storageEl.value,
+        condition: conditionEl.value,
+        notes: document.getElementById('notes').value,
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        imagesData: imagesData
+      };
+      localStorage.setItem('sellDraft', JSON.stringify(payload));
+      alert('Draft saved locally in your browser. It will be restored if you revisit this page.');
+    }
+
+    // ---------- SUBMIT / WHATSAPP ----------
+    function handleSubmit(){
+      if (!validate()){
+        window.scrollTo({top:0,behavior:'smooth'});
+        return;
+      }
+
+      const estimate = getEstimate();
+      const data = {
+        category: categoryEl.value,
+        model: modelEl.value,
+        storage: storageEl.value,
+        condition: conditionEl.value,
+        notes: document.getElementById('notes').value || '-',
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        estimate: estimate
+      };
+
+      const message = `Hi WeBuyApple,%0A%0AI'd like to sell my device.%0A- Category: ${encodeURIComponent(data.category)}%0A- Model: ${encodeURIComponent(data.model)}%0A- Storage: ${encodeURIComponent(data.storage)}%0A- Condition: ${encodeURIComponent(data.condition)}%0A- Estimated Quote: R ${estimate ? estimate.toLocaleString() : 'N/A'}%0A- Notes: ${encodeURIComponent(data.notes)}%0A%0AContact details:%0A- Name: ${encodeURIComponent(data.name)}%0A- Phone: ${encodeURIComponent(data.phone)}`;
+
+      // If BUSINESS_WHATSAPP is not replaced, open chooser (api.whatsapp.com) but user should replace placeholder
+      const phoneRaw = BUSINESS_WHATSAPP.replace(/\s+/g, '');
+
+      let url;
+      if (phoneRaw && phoneRaw.includes('X')){
+        // placeholder still present - open generic WhatsApp compose (web) with message
+        url = `https://api.whatsapp.com/send?text=${message}`;
+      } else {
+        // send directly to business number
+        const cleaned = phoneRaw.replace(/[^+0-9]/g, '');
+        // use api endpoint
+        url = `https://api.whatsapp.com/send?phone=${encodeURIComponent(cleaned)}&text=${message}`;
+      }
+
+      // Clear saved draft after sending
+      // localStorage.removeItem('sellDraft'); // keep commented until you want automatic removal
+
+      // Open WhatsApp in new tab/window
+      window.open(url, '_blank');
+    }
+
+  </script>
+</body>
+</html>

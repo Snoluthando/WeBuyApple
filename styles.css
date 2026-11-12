@@ -1,0 +1,215 @@
+/* ========== GLOBAL RESET ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: #FAFAFA;
+  color: #1F1F24;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+  width: 100%;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #FFFFFF;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  border-bottom: 1px solid #F4F4F5;
+}
+
+.logo img {
+  height: 45px;
+}
+
+.navbar nav a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: #1F1F24;
+  font-size: 15px;
+  transition: 0.25s ease;
+}
+
+.navbar nav a:hover {
+  color: #3B82F6; /* Electric Blue hover */
+}
+
+.cta-btn {
+  background: #3B82F6;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+  height: 88vh;
+  background: url("https://images.unsplash.com/photo-1604275181488-5b07db328373?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  padding-left: 60px;
+  margin-top: 100px;
+}
+
+.hero-text h1 {
+  font-size: 56px;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.hero-text p {
+  margin-top: 12px;
+  font-size: 18px;
+  color: #F4F4F5;
+}
+
+.hero-btn {
+  margin-top: 30px;
+  display: inline-block;
+  padding: 12px 25px;
+  background: #3B82F6;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #FFFFFF;
+  transition: 0.25s ease;
+}
+
+.hero-btn:hover {
+  background: #1E66E6; /* slightly darker blue */
+}
+
+/* ========== TRUST BADGES ========== */
+.trust {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 35px;
+  background: #FAFAFA;
+  border-top: 1px solid #F4F4F5;
+  border-bottom: 1px solid #F4F4F5;
+}
+
+.trust-item {
+  font-size: 15px;
+  font-weight: 600;
+  color: #64748B; /* cool slate */
+}
+
+/* ========== FEATURED PRODUCTS ========== */
+.featured {
+  padding: 60px 60px;
+  text-align: center;
+}
+
+.featured h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1F1F24;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+/* Correct class name + fix sizing */
+.product-card {
+  background: rgb(255, 253, 253);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 350px;   /* prevents oversized cards */
+  margin: 0 auto;     /* centers inside grid */
+}
+
+/* Make product images smaller and uniform */
+.product-card img {
+  width: 100%;
+  height: 180px;       /* adjust this if needed */
+  object-fit: cover;   /* prevents stretching */
+  border-bottom: 1px solid #eee;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.12);
+}
+
+
+.product-card h3 {
+  margin-top: 15px;
+  color: #1F1F24;
+}
+
+.product-card p {
+  margin-top: 5px;
+  color: #64748B;
+}
+
+.product-card .view-more {
+  display: inline-block;
+  margin: 15px 0 20px;
+  padding: 10px 16px;
+  background: #3B82F6;     /* electric blue */
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.product-card .view-more:hover {
+  background: #1E66E6;    /* darker hover */
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+
+/* ========== SELL DEVICE ========== */
+.sell {
+  height: 350px;
+  background: #0D0D0F; /* primary black */
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 60px;
+}
+
+.sell-btn {
+  margin-top: 20px;
+  display: inline-block;
+  padding: 12px 25px;
+  background: #10B981; /* emerald */
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.sell-btn:hover {
+  background: #0E9E71;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #F4F4F5;
+  color: #1F1F24;
+  margin-top: 30px;
+}
